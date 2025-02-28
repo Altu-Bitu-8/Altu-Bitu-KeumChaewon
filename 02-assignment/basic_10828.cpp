@@ -4,65 +4,65 @@
 using namespace std;
 
 int main() {
-	stack<int> s;      // 스택
-	int N;             // 명령의 수
-	string command;    // 명령어
-	int num;           // push 연산 시, 스택에 넣을 정수
-	int result = 0;    // 각 명령어의 결과값
+    stack<int> s;      // 스택 선언
+    int N;             // 명령의 개수
+    string cmd;        // 명령어
+    int num;           // push 명령 시 삽입할 정수
+    int output = 0;    // 각 명령에 대한 출력값
 
-	cin >> N;
+    cin >> N;  // 명령의 개수를 입력받음
 
-	for (int i = 0; i < N; i++) {
-		cin >> command;
+    for (int i = 0; i < N; i++) {
+        cin >> cmd;  // 명령어를 입력받음
 
-		// 1. push
-		if (command == "push") {
-			cin >> num;
-			s.push(num);
-		}
+        // push 연산
+        if (cmd == "push") {
+            cin >> num;  // 스택에 넣을 정수 입력
+            s.push(num);  // 스택에 값 넣기
+        }
 
-		// 2. pop
-		else if (command == "pop") {
-			if (s.size() == 0) {
-				result = -1;
-				cout << result << endl;
-			}
-			else {
-				result = s.top();
-				cout << result << endl;
-				s.pop();
-			}
-		}
+        // pop 연산
+        else if (cmd == "pop") {
+            if (s.empty()) {
+                output = -1;  // 스택이 비어있으면 -1 출력
+                cout << output << endl;
+            }
+            else {
+                output = s.top();  // 스택의 맨 위 값을 출력
+                cout << output << endl;
+                s.pop();  // 스택에서 가장 위의 값 제거
+            }
+        }
 
-		// 3. size
-		else if (command == "size") {
-			cout << s.size() << endl;
-		}
+        // size 연산
+        else if (cmd == "size") {
+            cout << s.size() << endl;  // 스택에 들어있는 원소의 개수 출력
+        }
 
-		// 4. empty
-		else if (command == "empty") {
-			if (s.size() == 0) {
-				result = 1;
-				cout << result << endl;
-			}
-			else {
-				result = 0;
-				cout << result << endl;
-			}
-		}
+        // empty 연산
+        else if (cmd == "empty") {
+            if (s.empty()) {
+                output = 1;  // 스택이 비어있으면 1 출력
+                cout << output << endl;
+            }
+            else {
+                output = 0;  // 스택에 원소가 있으면 0 출력
+                cout << output << endl;
+            }
+        }
 
-		// 5. top
-		else if (command == "top") {
-			if (s.size() == 0) {
-				result = -1;
-				cout << result << endl;
-			}
-			else {
-				result = s.top();
-				cout << result << endl;
-			}
-		}
-	}
+        // top 연산
+        else if (cmd == "top") {
+            if (s.empty()) {
+                output = -1;  // 스택이 비어있으면 -1 출력
+                cout << output << endl;
+            }
+            else {
+                output = s.top();  // 스택의 맨 위 값을 출력
+                cout << output << endl;
+            }
+        }
+    }
 
-	return 0;
+    return 0;
 }

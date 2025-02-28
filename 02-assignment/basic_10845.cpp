@@ -1,104 +1,89 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
- 
+
 class Queue {
 public:
-	int queue[10000];
-	// 큐에 포함되어있는 내용은 begin~end-1까지임
-	int begin = 0;
-	int end = 0;
- 
-	Queue() {}
- 
-	void push(int X) { // 정수 X를 큐에 넣는 연산
-		queue[end] = X;
-		end += 1;
-	}
- 
-	bool empty() { // 큐가 비어있으면 1, 아니면 0 출력
-		if (end == begin)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
- 
-	int pop() { // 큐에서 가장 앞에 있는 정수를 빼고, 그 수를 출력
-		// 큐에 들어있는 정수가 없는 경우에 -1 출력
-		if (empty())
-		{
-			return -1;
-		}
-		int r = queue[begin];
-		queue[begin] = 0;
-		begin += 1;
-		return r;
-	}
- 
-	int size() { // 큐에 들어있는 정수의 개수를 출력
-		return end - begin; // 큐에 포함되어있는 내용은 begin~end-1까지임
-	}
- 
- 
-	int front() { // 큐의 가장 앞에 있는 정수 출력.
-		// 큐에 들어있는 정수가 없는 경우에 -1 출력
-		if (empty())
-		{
-			return -1;
-		}
-		return queue[begin];
-	}
- 
-	int back() { // 큐의 가장 뒤에 있는 정수 출력.
-		// 큐에 들어있는 정수가 없는 경우에 -1 출력
-		if (empty())
-		{
-			return -1;
-		}
-		return queue[end - 1];
-	}
+    int arr[10000];  // 큐를 나타내는 배열
+    int frontIdx = 0; // 큐의 앞쪽 인덱스
+    int backIdx = 0;  // 큐의 뒤쪽 인덱스
+
+    Queue() {}
+
+    // 큐에 정수 X를 넣는 연산
+    void enqueue(int X) {
+        arr[backIdx] = X;
+        backIdx++;
+    }
+
+    // 큐가 비어있는지 확인
+    bool isEmpty() {
+        return frontIdx == backIdx;
+    }
+
+    // 큐에서 가장 앞에 있는 요소를 꺼내고 출력
+    int dequeue() {
+        if (isEmpty()) {
+            return -1;  // 큐가 비어있으면 -1 반환
+        }
+        int result = arr[frontIdx];
+        arr[frontIdx] = 0; // 해당 위치를 비움
+        frontIdx++;
+        return result;
+    }
+
+    // 큐에 있는 요소의 개수를 반환
+    int getSize() {
+        return backIdx - frontIdx;
+    }
+
+    // 큐의 가장 앞에 있는 요소 반환
+    int getFront() {
+        if (isEmpty()) {
+            return -1;  // 큐가 비어있으면 -1 반환
+        }
+        return arr[frontIdx];
+    }
+
+    // 큐의 가장 뒤에 있는 요소 반환
+    int getBack() {
+        if (isEmpty()) {
+            return -1;  // 큐가 비어있으면 -1 반환
+        }
+        return arr[backIdx - 1];
+    }
 };
- 
+
 int main() {
-	int N; // 주어지는 명령의 수
-	cin >> N;
- 
-	Queue q;
- 
-	while (N--) {
- 
-		string cmd; // 명령어
-		cin >> cmd;
- 
-		if (cmd == "push")
-		{
-			int input; // 넣을 입력값
-			cin >> input;
-			q.push(input);
-		}
-		else if (cmd == "pop")
-		{
-			cout << q.pop() << '\n';
-		}
-		else if (cmd == "size")
-		{
-			cout << q.size() << '\n';
-		}
-		else if (cmd == "empty")
-		{
-			cout << q.empty() << '\n';
-		}
-		else if (cmd == "front") {
-			cout << q.front() << '\n';
-		}
-		else if (cmd == "back")
-		{
-			cout << q.back() << '\n';
-		}
-	}
- 
-	return 0;
+    int N; // 명령의 수
+    cin >> N;
+
+    Queue q; // 큐 객체 생성
+
+    while (N--) {
+        string command;  // 명령어
+        cin >> command;
+
+        if (command == "push") {
+            int value;  // 넣을 값
+            cin >> value;
+            q.enqueue(value);
+        }
+        else if (command == "pop") {
+            cout << q.dequeue() << '\n';
+        }
+        else if (command == "size") {
+            cout << q.getSize() << '\n';
+        }
+        else if (command == "empty") {
+            cout << q.isEmpty() << '\n';
+        }
+        else if (command == "front") {
+            cout << q.getFront() << '\n';
+        }
+        else if (command == "back") {
+            cout << q.getBack() << '\n';
+        }
+    }
+
+    return 0;
 }
