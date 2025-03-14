@@ -23,7 +23,7 @@ int main() {
         cin >> positions[i];
     }
 
-    // 모든 거리 차이 계산산
+    // 모든 거리 차이 계산
     vector<int> diffs(N);
     for (int i = 0; i < N; i++) {
         diffs[i] = abs(positions[i] - S);
